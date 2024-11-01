@@ -1,5 +1,6 @@
 package saude.api.api.controller;
 
+import saude.api.api.model.Exercicio;
 import saude.api.api.model.Refeicao;
 import saude.api.api.repository.RefeicaoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,13 +18,14 @@ public class RefeicaoController {
     @GetMapping("/listar")
     public String listarRefeicoes(Model model) {
         model.addAttribute("refeicoes", refeicaoRepository.findAll());
-        return "crud"; // Redireciona para a página principal de CRUD
+        model.addAttribute("refeicao", new Refeicao());
+        return "crud";
     }
 
     @PostMapping("/salvar")
     public String salvarRefeicao(@ModelAttribute Refeicao refeicao) {
         refeicaoRepository.save(refeicao);
-        return "redirect:/crud"; // Redireciona para o CRUD principal
+        return "redirect:/crud";
     }
 
     @GetMapping("/editar/{id}")
@@ -31,7 +33,7 @@ public class RefeicaoController {
         Refeicao refeicao = refeicaoRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Refeição não encontrada: " + id));
         model.addAttribute("refeicao", refeicao);
-        return "crud"; // Retorna para o CRUD onde o formulário de edição será exibido
+        return "crud";
     }
 
     @GetMapping("/excluir/{id}")

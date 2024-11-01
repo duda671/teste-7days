@@ -16,6 +16,7 @@ public class SonoController {
 
     @GetMapping("/cadastro")
     public String formCadastro(Model model) {
+        model.addAttribute("sonos", sonoRepository.findAll());
         model.addAttribute("sono", new Sono());
         return "crud";
     }

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -118,25 +118,6 @@
         </section>
 
         <!-- Formulários de Adição/Edição -->
-        <div class="form-popup" id="exercicioForm">
-            <form action="/exercicio" method="post" class="form-container">
-                <h2>Adicionar Exercício</h2>
-                <label for="exercicioNome">Nome:</label>
-                <input type="text" id="exercicioNome" name="nome" required>
-
-                <label for="exercicioTipo">Tipo:</label>
-                <input type="text" id="exercicioTipo" name="tipo" required>
-
-                <label for="exercicioQuantidade">Quantidade:</label>
-                <input type="number" id="exercicioQuantidade" name="quantidade" required>
-
-                <label for="exercicioData">Data:</label>
-                <input type="date" id="exercicioData" name="data" required>
-
-                <button type="submit" class="btn">Salvar</button>
-                <button type="button" class="btn cancel" onclick="closeForm('exercicioForm')">Fechar</button>
-            </form>
-        </div>
         
         <div class="form-popup" id="sonoForm">
             <form action="/sono/salvar" method="post" class="form-container">

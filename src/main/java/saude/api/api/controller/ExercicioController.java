@@ -17,13 +17,14 @@ public class ExercicioController {
     @GetMapping("/listar")
     public String listarExercicios(Model model) {
         model.addAttribute("exercicios", exercicioRepository.findAll());
-        return "crud"; // Redireciona para a página principal de CRUD
+        model.addAttribute("exercicio", new Exercicio());
+        return "crud";
     }
 
     @PostMapping("/salvar")
     public String salvarExercicio(@ModelAttribute Exercicio exercicio) {
         exercicioRepository.save(exercicio);
-        return "redirect:/crud"; // Redireciona para o CRUD principal
+        return "redirect:/crud";
     }
 
     @GetMapping("/editar/{id}")
@@ -31,7 +32,7 @@ public class ExercicioController {
         Exercicio exercicio = exercicioRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Exercício não encontrado: " + id));
         model.addAttribute("exercicio", exercicio);
-        return "crud"; // Retorna para o CRUD onde o formulário de edição será exibido
+        return "crud";
     }
 
     @GetMapping("/excluir/{id}")
