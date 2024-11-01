@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciamento de Saúde Diária</title>
+    <link rel="stylesheet" href="/css/crud-style.css">
+</head>
+<body>
+    <header>
+        <h1>Saúde Diária</h1>
+        <p>Gerencie suas atividades diárias para uma vida mais saudável</p>
+        <nav>
+            <ul>
+                <li><a href="#exercicios">Exercícios</a></li>
+                <li><a href="#refeicoes">Refeições</a></li>
+                <li><a href="#sono">Sono</a></li>
+                <li><a href="#relatorio">Relatório</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="exercicios">
+            <div class="teste">
+                <h2>Exercícios</h2>
+                <button onclick="openForm('exercicioForm')">Adicionar Exercício</button>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Tipo</th>
+                        <th>Quantidade</th>
+                        <th>Data</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="exercicio : ${exercicios}">
+                        <td th:text="${exercicio.nome}">Nome do Exercício</td>
+                        <td th:text="${exercicio.tipo}">Tipo do Exercício</td>
+                        <td th:text="${exercicio.quantidade}">Quantidade</td>
+                        <td th:text="${exercicio.data}">Data</td>
+                        <td>
+                            <a th:href="@{'/exercicio/editar/' + ${exercicio.id}}" class="btn">Editar</a>
+                            <a th:href="@{'/exercicio/excluir/' + ${exercicio.id}}" class="btn" onclick="return confirm('Tem certeza que deseja excluir?')">Excluir</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+        
+
+        <section id="refeicoes">
+            <div class="teste">
+                <h2>Refeições</h2>
+                <button onclick="openForm('refeicaoForm')">Adicionar Refeição</button>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Tipo</th>
+                        <th>Quantidade</th>
+                        <th>Data</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="refeicao : ${refeicoes}">
+                        <td th:text="${refeicao.nome}">Nome da Refeição</td>
+                        <td th:text="${refeicao.tipo}">Tipo da Refeição</td>
+                        <td th:text="${refeicao.quantidade}">Quantidade</td>
+                        <td th:text="${refeicao.data}">Data</td>
+                        <td>
+                            <a th:href="@{'/refeicao/editar/' + ${refeicao.id}}" class="btn">Editar</a>
+                            <a th:href="@{'/refeicao/excluir/' + ${refeicao.id}}" class="btn" onclick="return confirm('Tem certeza que deseja excluir?')">Excluir</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+        
+
+        <section id="sono">
+            <div class="teste">
+                <h2>Sono</h2>
+                <button onclick="openForm('sonoForm')">Adicionar Registro de Sono</button>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Quantidade de Horas</th>
+                        <th>Qualidade</th>
+                        <th>Data</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="sono : ${sonos}">
+                        <td th:text="${sono.horasDormidas}">Quantidade de Horas</td>
+                        <td th:text="${sono.qualidade}">Qualidade</td>
+                        <td th:text="${sono.data}">Data</td>
+                        <td>
+                            <a th:href="@{'/sono/editar/' + ${sono.id}}" class="btn">Editar</a>
+                            <a th:href="@{'/sono/excluir/' + ${sono.id}}" class="btn" onclick="return confirm('Tem certeza que deseja excluir?')">Excluir</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="relatorio">
+            <h2>Relatório de Hábitos</h2>
+            <p>Veja estatísticas e gráficos dos seus hábitos diários.</p>
+            <!-- Local para gráficos e estatísticas -->
+        </section>
+
+        <!-- Formulários de Adição/Edição -->
+        <div class="form-popup" id="exercicioForm">
+            <form action="/exercicio" method="post" class="form-container">
+                <h2>Adicionar Exercício</h2>
+                <label for="exercicioNome">Nome:</label>
+                <input type="text" id="exercicioNome" name="nome" required>
+
+                <label for="exercicioTipo">Tipo:</label>
+                <input type="text" id="exercicioTipo" name="tipo" required>
+
+                <label for="exercicioQuantidade">Quantidade:</label>
+                <input type="number" id="exercicioQuantidade" name="quantidade" required>
+
+                <label for="exercicioData">Data:</label>
+                <input type="date" id="exercicioData" name="data" required>
+
+                <button type="submit" class="btn">Salvar</button>
+                <button type="button" class="btn cancel" onclick="closeForm('exercicioForm')">Fechar</button>
+            </form>
+        </div>
+        
+        <div class="form-popup" id="sonoForm">
+            <form action="/sono/salvar" method="post" class="form-container">
+                <h2>Adicionar Registro de Sono</h2>
+                
+                <label for="horasDormidas">Horas Dormidas:</label>
+                <input type="number" id="horasDormidas" name="horasDormidas" required>
+                
+                <label for="qualidade">Qualidade:</label>
+                <input type="text" id="qualidade" name="qualidade" required>
+                
+                <label for="data">Data:</label>
+                <input type="date" id="data" name="data" required>
+        
+                <button type="submit" class="btn">Salvar</button>
+                <button type="button" class="btn cancel" onclick="closeForm('sonoForm')">Fechar</button>
+            </form>
+        </div>
+        
+        <div class="form-popup" id="exercicioForm">
+            <form action="/exercicio/salvar" method="post" th:object="${exercicio}" class="form-container">
+                <h2 th:text="${exercicio.id != null ? 'Editar Exercício' : 'Adicionar Exercício'}">Adicionar Exercício</h2>
+        
+                <label for="nome">Nome:</label>
+                <input type="text" id="nome" th:field="*{nome}" required>
+        
+                <label for="tipo">Tipo:</label>
+                <input type="text" id="tipo" th:field="*{tipo}" required>
+        
+                <label for="quantidade">Quantidade:</label>
+                <input type="number" id="quantidade" th:field="*{quantidade}" required>
+        
+                <label for="data">Data:</label>
+                <input type="date" id="data" th:field="*{data}" required>
+        
+                <button type="submit" class="btn">Salvar</button>
+                <button type="button" class="btn cancel" onclick="closeForm('exercicioForm')">Fechar</button>
+            </form>
+        </div>
+
+        <div class="form-popup" id="refeicaoForm">
+            <form action="/refeicao/salvar" method="post" th:object="${refeicao}" class="form-container">
+                <h2 th:text="${refeicao.id != null ? 'Editar Refeição' : 'Adicionar Refeição'}">Adicionar Refeição</h2>
+        
+                <label for="nome">Nome:</label>
+                <input type="text" id="nome" th:field="*{nome}" required>
+        
+                <label for="tipo">Tipo:</label>
+                <input type="text" id="tipo" th:field="*{tipo}" required>
+        
+                <label for="quantidade">Quantidade:</label>
+                <input type="number" id="quantidade" th:field="*{quantidade}" required>
+        
+                <label for="data">Data:</label>
+                <input type="date" id="data" th:field="*{data}" required>
+        
+                <button type="submit" class="btn">Salvar</button>
+                <button type="button" class="btn cancel" onclick="closeForm('refeicaoForm')">Fechar</button>
+            </form>
+        </div>
+        
+
+    </main>
+
+    <script>
+        function openForm(formId) {
+            document.getElementById(formId).style.display = "block";
+        }
+
+        function closeForm(formId) {
+            document.getElementById(formId).style.display = "none";
+        }
+    </script>
+
+
+</body>
+</html>
