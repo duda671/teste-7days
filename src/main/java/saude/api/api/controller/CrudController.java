@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.thymeleaf.spring6.SpringTemplateEngine;
 
 import lombok.extern.slf4j.Slf4j;
+import saude.api.api.model.Exercicio;
+import saude.api.api.model.Refeicao;
+import saude.api.api.model.Sono;
 import saude.api.api.repository.ExercicioRepository;
 import saude.api.api.repository.RefeicaoRepository;
 import saude.api.api.repository.SonoRepository;
@@ -37,6 +40,11 @@ public class CrudController {
             model.addAttribute("sonos", sonoRepository.findAll());
             model.addAttribute("exercicios", exercicioRepository.findAll());
             model.addAttribute("refeicoes", refeicaoRepository.findAll());
+
+            model.addAttribute("exercicio", new Exercicio());
+            model.addAttribute("refeicao", new Refeicao());
+            model.addAttribute("sono", new Sono());
+
             return "crud";
         } catch (Exception e) {
             log.error(e.getMessage(), e);
@@ -44,20 +52,5 @@ public class CrudController {
         }
 
     }
-
-    // @GetMapping
-    // public ResponseEntity<?> crud(Model model) {
-    // try {
-    // model.addAttribute("sonos", sonoRepository.findAll());
-    // model.addAttribute("exercicios", exercicioRepository.findAll());
-    // model.addAttribute("refeicoes", refeicaoRepository.findAll());
-    // return ResponseEntity
-    // .status(HttpStatus.OK)
-    // .header(HttpHeaders.class, "crud").build();
-    // } catch (Exception e) {
-    // log.error(e.getMessage(), e);
-    // return ResponseEntity.badRequest().body("ERRO: " + e.getMessage());
-    // }
-    // }
 
 }

@@ -4,27 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gerenciamento de Saúde Diária</title>
-    <link rel="stylesheet" href="/css/crud-style.css">
+    <link rel="stylesheet" href="/css/crud-style.css" th:href="@{css/crud-style.css}">
 </head>
 <body>
+
     <header>
-        <h1>Saúde Diária</h1>
-        <p>Gerencie suas atividades diárias para uma vida mais saudável</p>
-        <nav>
-            <ul>
-                <li><a href="#exercicios">Exercícios</a></li>
-                <li><a href="#refeicoes">Refeições</a></li>
-                <li><a href="#sono">Sono</a></li>
-                <li><a href="#relatorio">Relatório</a></li>
-            </ul>
-        </nav>
+        <div class="logo">
+            <img class="logo2" src="img/logo.png" alt="Logo do Site">
+        </div>
+        
     </header>
 
     <main>
+        <nav>
+            <div class="menu">
+                <ul>
+                    <li><a href="#exercicios">Exercícios</a></li>
+                    <li><a href="#refeicoes">Refeições</a></li>
+                    <li><a href="#sono">Sono</a></li>
+                    <li><a href="#relatorio">Relatório</a></li>
+                </ul>
+            </div>
+            
+        </nav>
+
         <section id="exercicios">
             <div class="teste">
                 <h2>Exercícios</h2>
-                <button onclick="openForm('exercicioForm')">Adicionar Exercício</button>
+                <button class="btn-ad" onclick="openForm('exercicioForm')">Adicionar Exercício</button>
             </div>
             <table>
                 <thead>
@@ -55,7 +62,7 @@
         <section id="refeicoes">
             <div class="teste">
                 <h2>Refeições</h2>
-                <button onclick="openForm('refeicaoForm')">Adicionar Refeição</button>
+                <button class="btn-ad" onclick="openForm('refeicaoForm')">Adicionar Refeição</button>
             </div>
             <table>
                 <thead>
@@ -86,7 +93,7 @@
         <section id="sono">
             <div class="teste">
                 <h2>Sono</h2>
-                <button onclick="openForm('sonoForm')">Adicionar Registro de Sono</button>
+                <button class="btn-ad" onclick="openForm('sonoForm')">Adicionar Registro de Sono</button>
             </div>
             <table>
                 <thead>

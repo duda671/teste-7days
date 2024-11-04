@@ -6,7 +6,7 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background: linear-gradient(135deg, #bcb0c2, #efd5c4);
+    background: linear-gradient(to right, #969cb1, #d7c7c7);
     /* background-color: #bcb0c2; */
     color: #333;
 }
@@ -18,23 +18,35 @@ header {
     text-align: center;
 }
 
-header h1 {
-    margin: 0;
+.logo2{
+    height: 25vh;
 }
 
-nav ul {
+.menu{
+    display: flex;
+    align-items: center;
+    background-color: #969cb1;
+    padding: 1px;
+    border-radius: 8px;
+    justify-content: space-around;
+}
+
+.menu ul {
+    display: flex;
+    flex-direction: row;
     list-style-type: none;
-    padding: 0;
 }
 
-nav ul li {
-    display: inline;
-    margin: 0 15px;
-}
-
-nav ul li a {
-    color: #313f4e;
+nav a {
+    margin: 0 50px;
     text-decoration: none;
+    color: #fff;
+    font-weight: bold;
+    
+}
+
+nav a:hover {
+    color: #5e616d;
 }
 
 .teste{
@@ -43,6 +55,10 @@ nav ul li a {
     align-items: center;
     justify-content: center;
     flex-direction: column;
+}
+
+.btn-ad{
+  border-radius: 20px;
 }
 
 main {
@@ -57,10 +73,11 @@ main {
 section h2 {
     color: #617286;
     margin: 15px 0 0 0;
+    font-size: 32px;
 }
 
 button {
-    background-color: #e6b2a6;
+    background-color: #030587;
     color: white;
     border: none;
     padding: 10px 20px;
@@ -132,4 +149,22 @@ th {
 
 .form-container .btn:hover, .open-button:hover {
     opacity: 0.8;
+}
+
+#exercicios{
+    background-color: #d3d5dc;
+    margin-top: 10px;
+    border-radius: 5px;
+}
+
+#refeicoes{
+    background-color: #d3d5dc;
+    margin-top: 10px;
+    border-radius: 5px;
+}
+
+#sono{
+    background-color: #d3d5dc;
+    margin-top: 10px;
+    border-radius: 5px;
 }
