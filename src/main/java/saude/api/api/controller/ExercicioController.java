@@ -27,26 +27,16 @@ public class ExercicioController {
         return "redirect:/crud";
     }
 
-    // @GetMapping("/editar/{id}")
-    // public String editarExercicio(@PathVariable Long id, Model model) {
-    // Exercicio exercicio = exercicioRepository.findById(id)
-    // .orElseThrow(() -> new IllegalArgumentException("Exercício não encontrado: "
-    // + id));
-    // model.addAttribute("exercicio", exercicio);
-    // return "crud";
-    // }
-
     @GetMapping("/editar/{id}")
     public String editarExercicio(@PathVariable Long id, Model model) {
         Exercicio exercicio = exercicioRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Exercício não encontrado: " + id));
         model.addAttribute("exercicio", exercicio);
-        model.addAttribute("exercicios", exercicioRepository.findAll()); // Para mostrar a lista existente
         return "crud";
     }
 
-    @PostMapping("/editar/{id}")
-    public String editarExercicio(@PathVariable Long id, @ModelAttribute Exercicio exercicioAtualizado) {
+    @PutMapping("/editar/{id}")
+    public String atualizarExercicio(@PathVariable Long id, @ModelAttribute Exercicio exercicioAtualizado) {
         Exercicio exercicioExistente = exercicioRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Exercício não encontrado: " + id));
 

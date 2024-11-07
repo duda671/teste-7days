@@ -58,7 +58,7 @@
                         <td th:text="${exercicio.tempo}">Duração</td>
                         
                         <td>
-                            <a th:href="@{'/exercicio/editar/' + ${exercicio.id}}" class="btn">Editar</a>
+                            <a class="btn" onclick="openForm('editarExercicioForm')">Editar</a>
 
 
                             <a th:href="@{'/exercicio/excluir/' + ${exercicio.id}}" class="btn" onclick="return confirm('Tem certeza que deseja excluir?')">Excluir</a>
@@ -358,33 +358,30 @@
         </div>
         
         <div class="form-popup" id="exercicioForm">
-            <form action="#" th:action="@{${exercicio.id != null} ? '/exercicio/editar/' + ${exercicio.id} : '/exercicio/salvar'}" method="post" th:object="${exercicio}" class="form-container">
+            <form action="/exercicio/salvar" method="post" th:object="${exercicio}" class="form-container">
                 <h2 th:text="${exercicio.id != null ? 'Editar Exercício' : 'Adicionar Exercício'}">Adicionar Exercício</h2>
-                
-                <input type="hidden" th:field="*{id}">
-
+        
                 <label for="data">Data:</label>
                 <input type="date" id="data" th:field="*{data}" required>
-            
+
                 <label for="nome">Nome:</label>
                 <input type="text" id="nome" th:field="*{nome}" required>
-            
+        
                 <label for="series">Quantidade de Séries:</label>
                 <input type="number" id="series" th:field="*{series}" required>
-            
+        
                 <label for="repeticoes">Quantidade de Repetições:</label>
                 <input type="number" id="repeticoes" th:field="*{repeticoes}" required>
-            
+        
                 <label for="carga">Carga (kg):</label>
                 <input type="number" id="carga" th:field="*{carga}" step="0.1" required>
-            
+        
                 <label for="tempo">Duração (min):</label>
                 <input type="number" id="tempo" th:field="*{tempo}" required>
-            
+        
                 <button type="submit" class="btn">Salvar</button>
-                <button type="reset" class="btn cancel">Cancelar</button>
+                <button type="button" class="btn cancel" onclick="closeForm('exercicioForm')">Fechar</button>
             </form>
-            
         </div>
         
 
@@ -409,6 +406,37 @@
                 <button type="button" class="btn cancel" onclick="closeForm('refeicaoForm')">Fechar</button>
             </form>
         </div> 
+
+        <div class="form-popup" id="editarExercicioForm">
+            <form th:action="@{'/exercicio/editar/' + ${exercicio.id}}" method="post" th:object="${exercicio}" class="form-container"> 
+                <!-- Campo oculto para informar que é uma requisição PUT -->
+                <input type="hidden" name="_method" value="put">
+                <input type="hidden" th:field="*{id}"> <!-- Campo oculto para enviar o ID -->
+            
+                <label for="data">Data:</label>
+                <input type="date" id="data" th:field="*{data}" required>
+            
+                <label for="nome">Nome:</label>
+                <input type="text" id="nome" th:field="*{nome}" required>
+            
+                <label for="series">Quantidade de Séries:</label>
+                <input type="number" id="series" th:field="*{series}" required>
+            
+                <label for="repeticoes">Quantidade de Repetições:</label>
+                <input type="number" id="repeticoes" th:field="*{repeticoes}" required>
+            
+                <label for="carga">Carga (kg):</label>
+                <input type="number" id="carga" th:field="*{carga}" step="0.1" required>
+            
+                <label for="tempo">Duração (min):</label>
+                <input type="number" id="tempo" th:field="*{tempo}" required>
+            
+                <button type="submit" class="btn">Salvar</button>
+                <button type="reset" class="btn cancel" onclick="closeForm('editarExercicioForm')">Cancelar</button>
+            </form>
+        </div>
+        
+        
         
         
 
