@@ -58,9 +58,18 @@
                         <td th:text="${exercicio.tempo}">Duração</td>
                         
                         <td>
-                            <a class="btn" onclick="openForm('editarExercicioForm')">Editar</a>
-
-
+                          <a href="javascript:void(0);" 
+                          class="btn" 
+                          th:attr="data-id=${exercicio.id}, 
+                          data-data=${exercicio.data},
+                          data-nome=${exercicio.nome},
+                          data-series=${exercicio.series},
+                          data-repeticoes=${exercicio.repeticoes},
+                          data-carga=${exercicio.carga},
+                          data-tempo=${exercicio.tempo}"
+                          onclick="editExercicio(this)">
+                          Editar
+                       </a>
                             <a th:href="@{'/exercicio/excluir/' + ${exercicio.id}}" class="btn" onclick="return confirm('Tem certeza que deseja excluir?')">Excluir</a>
                         </td>
                     </tr>
@@ -383,6 +392,34 @@
                 <button type="button" class="btn cancel" onclick="closeForm('exercicioForm')">Fechar</button>
             </form>
         </div>
+
+        <div class="form-popup" id="editarExercicioForm">
+          <form method="post" class="form-container">
+              <input type="hidden" id="id" name="id">
+      
+              <label for="data">Data:</label>
+              <input type="date" id="data" name="data" required>
+      
+              <label for="nome">Nome:</label>
+              <input type="text" id="nome" name="nome" required>
+      
+              <label for="series">Quantidade de Séries:</label>
+              <input type="number" id="series" name="series" required>
+      
+              <label for="repeticoes">Quantidade de Repetições:</label>
+              <input type="number" id="repeticoes" name="repeticoes" required>
+      
+              <label for="carga">Carga (kg):</label>
+              <input type="number" id="carga" name="carga" step="0.1" required>
+      
+              <label for="tempo">Duração (min):</label>
+              <input type="number" id="tempo" name="tempo" required>
+      
+              <button type="submit" class="btn">Salvar</button>
+              <button type="button" class="btn cancel" onclick="closeForm('editarExercicioForm')">Cancelar</button>
+          </form>
+      </div>
+      
         
 
         <div class="form-popup" id="refeicaoForm">
@@ -407,34 +444,6 @@
             </form>
         </div> 
 
-        <div class="form-popup" id="editarExercicioForm">
-            <form th:action="@{'/exercicio/editar/' + ${exercicio.id}}" method="post" th:object="${exercicio}" class="form-container"> 
-                <!-- Campo oculto para informar que é uma requisição PUT -->
-                <input type="hidden" name="_method" value="put">
-                <input type="hidden" th:field="*{id}"> <!-- Campo oculto para enviar o ID -->
-            
-                <label for="data">Data:</label>
-                <input type="date" id="data" th:field="*{data}" required>
-            
-                <label for="nome">Nome:</label>
-                <input type="text" id="nome" th:field="*{nome}" required>
-            
-                <label for="series">Quantidade de Séries:</label>
-                <input type="number" id="series" th:field="*{series}" required>
-            
-                <label for="repeticoes">Quantidade de Repetições:</label>
-                <input type="number" id="repeticoes" th:field="*{repeticoes}" required>
-            
-                <label for="carga">Carga (kg):</label>
-                <input type="number" id="carga" th:field="*{carga}" step="0.1" required>
-            
-                <label for="tempo">Duração (min):</label>
-                <input type="number" id="tempo" th:field="*{tempo}" required>
-            
-                <button type="submit" class="btn">Salvar</button>
-                <button type="reset" class="btn cancel" onclick="closeForm('editarExercicioForm')">Cancelar</button>
-            </form>
-        </div>
         
         
         
@@ -451,6 +460,44 @@
             document.getElementById(formId).style.display = "none";
         }
         
+        function editExercicio(element) {
+          openForm('editarExercicioForm'); 
+          const id = element.getAttribute("data-id");
+          const data = element.getAttribute("data-data");
+          const nome = element.getAttribute("data-nome");
+          const series = element.getAttribute("data-series");
+          const repeticoes = element.getAttribute("data-repeticoes");
+          const carga = element.getAttribute("data-carga");
+          const tempo = element.getAttribute("data-tempo");
+      
+          document.getElementById("editarExercicioForm").innerHTML = `
+              <form method="post" class="form-container" action="/exercicio/editar/${id}">
+                  <input type="hidden" name="id" value="${id}">
+                  
+                  <label for="data">Data:</label>
+                  <input type="date" id="data" name="data" value="${data}" required>
+                  
+                  <label for="nome">Nome:</label>
+                  <input type="text" id="nome" name="nome" value="${nome}" required>
+                  
+                  <label for="series">Quantidade de Séries:</label>
+                  <input type="number" id="series" name="series" value="${series}" required>
+                  
+                  <label for="repeticoes">Quantidade de Repetições:</label>
+                  <input type="number" id="repeticoes" name="repeticoes" value="${repeticoes}" required>
+                  
+                  <label for="carga">Carga (kg):</label>
+                  <input type="number" id="carga" name="carga" value="${carga}" step="0.1" required>
+                  
+                  <label for="tempo">Duração (min):</label>
+                  <input type="number" id="tempo" name="tempo" value="${tempo}" required>
+                  
+                  <button type="submit" class="btn">Salvar</button>
+                  <button type="button" class="btn cancel" onclick="closeForm('editarExercicioForm')">Cancelar</button>
+              </form>
+          `;
+          document.querySelector("#editarExercicioForm form").setAttribute("action", `/exercicio/editar/${id}`);
+      }
     </script>
 
 
