@@ -6,27 +6,27 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background: linear-gradient(to right, #969cb1, #d7c7c7);
+    background: linear-gradient(to right, #ae9aaa, #d7c7c7);
     /* background-color: #bcb0c2; */
     color: #333;
 }
 
 header {
     /* background-color: #efd5c4; */
-    color: #313f4e;
+    color: #5c1758;
     padding: 1em 0;
     text-align: center;
 }
 
 .logo2{
-    height: 25vh;
+    height: 12vh;
 }
 
 .menu{
     display: flex;
     align-items: center;
-    background-color: #969cb1;
-    padding: 1px;
+    background-color: #8c1c64;
+    padding: 1px 15px 1px 10px;
     border-radius: 8px;
     justify-content: space-around;
 }
@@ -46,7 +46,7 @@ nav a {
 }
 
 nav a:hover {
-    color: #5e616d;
+    color: #ae9aaa;
 }
 
 .teste{
@@ -57,12 +57,24 @@ nav a:hover {
     flex-direction: column;
 }
 
+.btn{
+    background-color: #ae9aaa;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    margin: 5px 0;
+    cursor: pointer;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
 .btn-ad{
   border-radius: 20px;
 }
 
 main {
-    max-width: 900px;
+    max-width: 1000px;
     margin: 20px auto;
     padding: 20px;
     background-color: white;
@@ -71,13 +83,13 @@ main {
 }
 
 section h2 {
-    color: #617286;
+    color: #321141;
     margin: 15px 0 0 0;
     font-size: 32px;
 }
 
 button {
-    background-color: #030587;
+    background-color: #ae9aaa;
     color: white;
     border: none;
     padding: 10px 20px;
@@ -101,11 +113,13 @@ table, th, td {
     border: 1px solid #ddd;
     padding: 8px;
     text-align: center;
+    
 }
 
 th {
-    background-color: #e6b2a6;
+    background-color: #ae9aaa;
     color: white;
+    
 }
 
 .form-popup {
@@ -115,6 +129,7 @@ th {
     right: 15px;
     border: 3px solid #f1f1f1;
     z-index: 9;
+    border-radius: 8px;
 }
 
 .form-container {
@@ -134,7 +149,7 @@ th {
 }
 
 .form-container .btn {
-    background-color: #e6b2a6;
+    background-color: #ae9aaa;
     color: white;
     padding: 10px;
     border: none;
@@ -155,16 +170,19 @@ th {
     background-color: #d3d5dc;
     margin-top: 10px;
     border-radius: 5px;
+    padding-bottom: 15px;
 }
 
 #refeicoes{
     background-color: #d3d5dc;
     margin-top: 10px;
     border-radius: 5px;
+    padding-bottom: 15px;
 }
 
 #sono{
     background-color: #d3d5dc;
     margin-top: 10px;
     border-radius: 5px;
+    padding-bottom: 15px;
 }

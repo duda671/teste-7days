@@ -27,12 +27,40 @@ public class ExercicioController {
         return "redirect:/crud";
     }
 
+    // @GetMapping("/editar/{id}")
+    // public String editarExercicio(@PathVariable Long id, Model model) {
+    // Exercicio exercicio = exercicioRepository.findById(id)
+    // .orElseThrow(() -> new IllegalArgumentException("Exercício não encontrado: "
+    // + id));
+    // model.addAttribute("exercicio", exercicio);
+    // return "crud";
+    // }
+
     @GetMapping("/editar/{id}")
     public String editarExercicio(@PathVariable Long id, Model model) {
         Exercicio exercicio = exercicioRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Exercício não encontrado: " + id));
         model.addAttribute("exercicio", exercicio);
+        model.addAttribute("exercicios", exercicioRepository.findAll()); // Para mostrar a lista existente
         return "crud";
+    }
+
+    @PostMapping("/editar/{id}")
+    public String editarExercicio(@PathVariable Long id, @ModelAttribute Exercicio exercicioAtualizado) {
+        Exercicio exercicioExistente = exercicioRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Exercício não encontrado: " + id));
+
+        // Atualiza os campos
+        exercicioExistente.setNome(exercicioAtualizado.getNome());
+        exercicioExistente.setSeries(exercicioAtualizado.getSeries());
+        exercicioExistente.setRepeticoes(exercicioAtualizado.getRepeticoes());
+        exercicioExistente.setCarga(exercicioAtualizado.getCarga());
+        exercicioExistente.setTempo(exercicioAtualizado.getTempo());
+        exercicioExistente.setData(exercicioAtualizado.getData());
+
+        // Salva as mudanças
+        exercicioRepository.save(exercicioExistente);
+        return "redirect:/exercicio/listar";
     }
 
     @GetMapping("/excluir/{id}")

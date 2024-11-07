@@ -17,8 +17,11 @@ public class Exercicio {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String nome;
-    private String tipo;
-    private Double quantidade;
     private LocalDate data;
+    private String nome;
+    private Integer series;
+    private Integer repeticoes;
+    private Double carga;
+    private Double tempo;
+
 }

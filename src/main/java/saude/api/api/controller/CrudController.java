@@ -20,6 +20,11 @@ import saude.api.api.repository.ExercicioRepository;
 import saude.api.api.repository.RefeicaoRepository;
 import saude.api.api.repository.SonoRepository;
 
+import saude.api.api.service.RelatorioService;
+
+import java.util.Map;
+import java.util.List;
+
 @Slf4j
 @Controller
 @RequestMapping("/crud")
@@ -34,6 +39,9 @@ public class CrudController {
     @Autowired
     private RefeicaoRepository refeicaoRepository;
 
+    @Autowired
+    private RelatorioService relatorioService;
+
     @GetMapping
     public String crud(Model model) {
         try {
@@ -44,6 +52,26 @@ public class CrudController {
             model.addAttribute("exercicio", new Exercicio());
             model.addAttribute("refeicao", new Refeicao());
             model.addAttribute("sono", new Sono());
+
+            // Adiciona a média geral de tempo ao modelo
+            Double mediaTempoGeral = relatorioService.getMediaTempoGeral();
+            model.addAttribute("mediaTempoGeral", mediaTempoGeral);
+
+            // Adiciona a lista de tempos individuais ao modelo
+            List<Double> temposIndividuais = relatorioService.getTemposIndividuais();
+            model.addAttribute("temposIndividuais", temposIndividuais);
+
+            // Dados das refeições
+            Double mediaCaloriasGeral = relatorioService.getMediaCaloriasGeral();
+            model.addAttribute("mediaCaloriasGeral", mediaCaloriasGeral);
+            List<Double> caloriasIndividuais = relatorioService.getCaloriasIndividuais();
+            model.addAttribute("caloriasIndividuais", caloriasIndividuais);
+
+            // Dados do sono
+            Double mediaHorasSono = relatorioService.getMediaHorasSono();
+            model.addAttribute("mediaHorasSono", mediaHorasSono);
+            List<Integer> horasIndividuaisSono = relatorioService.getHorasIndividuaisSono();
+            model.addAttribute("horasIndividuaisSono", horasIndividuaisSono);
 
             return "crud";
         } catch (Exception e) {
